@@ -1,0 +1,15 @@
+Tag: '[Holographic Chat]'
+Prefix: 'said'
+#If Option True, Hologram will stay within value time choosen below. If not it will add 1.5 seconds per 3 characters
+Hologram_time_fixed: true
+Hologram_time: 5000
+#Hologram Y value:
+Hologram_height: 3
+#Message shown on /hdchat
+Help_message:
+  - '[Holographic Chat]'
+  - '/hdchat - Main Command'
+  - '/hdchat toggle - Turns the Hologram On or Off for the player itself'
+  - '/hdchat toggle <player> - Turns the Hologram On or Off to the player chosen'
+#Maximum of chat lines per hologram
+Max_lines: 4
