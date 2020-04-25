@@ -12,6 +12,7 @@ public class Configuration {
     static int hologram_time;
     static int hologram_height;
     static int hologram_text_lines;
+    static boolean special_chat;
 
     static List<String> help_message;
 
@@ -27,6 +28,7 @@ public class Configuration {
         hologram_height = getPlugin().getConfig().getInt("Hologram_height");
         help_message = getPlugin().getConfig().getStringList("Help_message");
         hologram_text_lines = getPlugin().getConfig().getInt("Max_lines");
+        special_chat = getPlugin().getConfig().getBoolean("Special_chat");
     }
 
     public static String getTag() {
@@ -55,5 +57,9 @@ public class Configuration {
 
     public static int getHologram_text_lines() {
         return hologram_text_lines;
+    }
+
+    public static boolean getSpecial_chat() {
+        return special_chat;
     }
 }

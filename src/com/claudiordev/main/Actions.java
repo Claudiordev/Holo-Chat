@@ -92,49 +92,86 @@ public class Actions implements Listener {
         if (!message.startsWith("/")) {
             //plugin.getLogger().info("Message detected by Player: " + player.getName() +  ",message: " + message);
 
-            for (String name : hologramas.keySet()) {
+            if (Configuration.getSpecial_chat()) {
+                if (message.startsWith("!")) {
+                    message = message.replace("!", "");
 
-                //If name on Holograms Hash Map equals to Name of Moving Player, then get respective Hologram of it
-                if (name.equals(player.getName())) {
-                    Hologram holograma = hologramas.get(name);
+                    for (String name : hologramas.keySet()) {
 
-                    long random_id = (long) Math.random();
+                        //If name on Holograms Hash Map equals to Name of Moving Player, then get respective Hologram of it
+                        if (name.equals(player.getName())) {
+                            Hologram holograma = hologramas.get(name);
 
-                    HologramMessage hologramMessage = new HologramMessage(message, random_id);
-                    hologramMessages.add(hologramMessage);
+                            long random_id = (long) Math.random();
 
-                    hologramHandler = new HologramHandler(holograma, size, random_id, hologramMessage);
+                            HologramMessage hologramMessage = new HologramMessage(message, random_id);
+                            hologramMessages.add(hologramMessage);
 
-                    hologramHandler.start();
+                            hologramHandler = new HologramHandler(holograma, size, random_id, hologramMessage);
 
-                    /**
-                     if (holograma.size() > 0) {
-                     holograma.removeLine(holograma.size());
-                     }
+                            hologramHandler.start();
 
-                     TextLine textLine = holograma.appendTextLine(net.md_5.bungee.api.ChatColor.AQUA + player.getName() + ChatColor.GOLD + " " + Configuration.getHologram_prefix() + ":");
-                     holograma.appendTextLine(ChatColor.YELLOW + message);
-                     **/
+                            if (holograma.size() < 1) {
+                                TextLine textLine = holograma.appendTextLine(net.md_5.bungee.api.ChatColor.AQUA + player.getName() + ChatColor.GOLD + " " + Configuration.getHologram_prefix() + ":");
+                                holograma.appendTextLine(ChatColor.YELLOW + hologramMessage.getContent());
+                            } else if (holograma.size() > 1) {
+                                if (holograma.size() < Configuration.getHologram_text_lines() + 1) {
+                                    holograma.appendTextLine(ChatColor.YELLOW + message);
+                                } else {
+                                    holograma.removeLine(1);
+                                    holograma.appendTextLine(ChatColor.YELLOW + message);
+                                }
+                            }
 
-                    if (holograma.size() < 1) {
-                        TextLine textLine = holograma.appendTextLine(net.md_5.bungee.api.ChatColor.AQUA + player.getName() + ChatColor.GOLD + " " + Configuration.getHologram_prefix() + ":");
-                        holograma.appendTextLine(ChatColor.YELLOW + hologramMessage.getContent());
-                    } else if (holograma.size() > 1) {
-                        if (holograma.size() < Configuration.getHologram_text_lines() + 1) {
-                            holograma.appendTextLine(ChatColor.YELLOW + message);
-                        } else {
-                            holograma.removeLine(1);
-                            holograma.appendTextLine(ChatColor.YELLOW + message);
+                            //Handle the clearLines of each Hologram through a separated Thread on HologramHandler
+                            /**if (hologramHandler != null) {
+                             hologramHandler.setRunning(false);
+                             hologramHandler = null;
+                             }**/
                         }
                     }
 
-                    //Handle the clearLines of each Hologram through a separated Thread on HologramHandler
-                    /**if (hologramHandler != null) {
-                     hologramHandler.setRunning(false);
-                     hologramHandler = null;
-                     }**/
+                } else {
+
+                }
+            } else {
+
+                for (String name : hologramas.keySet()) {
+
+                    //If name on Holograms Hash Map equals to Name of Moving Player, then get respective Hologram of it
+                    if (name.equals(player.getName())) {
+                        Hologram holograma = hologramas.get(name);
+
+                        long random_id = (long) Math.random();
+
+                        HologramMessage hologramMessage = new HologramMessage(message, random_id);
+                        hologramMessages.add(hologramMessage);
+
+                        hologramHandler = new HologramHandler(holograma, size, random_id, hologramMessage);
+
+                        hologramHandler.start();
+
+                        if (holograma.size() < 1) {
+                            TextLine textLine = holograma.appendTextLine(net.md_5.bungee.api.ChatColor.AQUA + player.getName() + ChatColor.GOLD + " " + Configuration.getHologram_prefix() + ":");
+                            holograma.appendTextLine(ChatColor.YELLOW + hologramMessage.getContent());
+                        } else if (holograma.size() > 1) {
+                            if (holograma.size() < Configuration.getHologram_text_lines() + 1) {
+                                holograma.appendTextLine(ChatColor.YELLOW + message);
+                            } else {
+                                holograma.removeLine(1);
+                                holograma.appendTextLine(ChatColor.YELLOW + message);
+                            }
+                        }
+
+                        //Handle the clearLines of each Hologram through a separated Thread on HologramHandler
+                        /**if (hologramHandler != null) {
+                         hologramHandler.setRunning(false);
+                         hologramHandler = null;
+                         }**/
+                    }
                 }
             }
+
         }
     }
 }

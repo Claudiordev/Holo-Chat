@@ -13,3 +13,5 @@ Help_message:
   - '/hdchat toggle <player> - Turns the Hologram On or Off to the player chosen'
 #Maximum of chat lines per hologram
 Max_lines: 4
+#If activated, the Holograms will only appear when typed "!" on the begining of the sentence
+Special_chat: false
