@@ -29,8 +29,6 @@ public class Main extends JavaPlugin {
         //Get the Plugin Manager
         pm = getServer().getPluginManager();
 
-        getLogger().info("Skills Plugin Activated");
-
         //Register a new event, of the Class Actions as a New Instance of it, on the plugin variable referent to Skills,
         pm.registerEvents(new Actions(), plugin);
 
