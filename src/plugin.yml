@@ -1,11 +1,11 @@
 name: HolographicChat
-version: 0.1
-description: The perfect chat display Plugin
+version: 1.0
+description: The perfect chat display
 author: Claudiordev
 softdepend: [HolographicDisplays]
 main: com.claudiordev.main.Main
 api-version: 1.15
 commands:
   hdchat:
-    description: Main command plugin
+    description: Main plugin command
     usage: /hdchat

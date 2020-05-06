@@ -1,12 +1,19 @@
 package com.claudiordev.main;
 
 import com.claudiordev.config.Configuration;
+import com.claudiordev.files.MessagesFile;
 import com.claudiordev.utils.ColorCodes;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+
+import java.io.Console;
+
 public class Commands implements CommandExecutor {
+
+    ColorCodes colorCodes = new ColorCodes();
 
     /**
      *
@@ -19,29 +26,32 @@ public class Commands implements CommandExecutor {
      */
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] strings) {
-        Player player = (Player) commandSender;
         if (label.equals("hdchat")) {
             if (strings.length > 0) {
                 //Only available with ProtocolLib
                 if (strings[0].equals("toggle")) {
-                    if (strings[1].equalsIgnoreCase("on") || strings[1].equalsIgnoreCase("off"))
-                    {
-                        if (commandSender instanceof Player) {
-                            if (strings[1].equalsIgnoreCase("on")) {
-                                Actions.setVisibility(player, true);
-                                player.sendMessage("Holographic chat activated!");
-                            } else if (strings[1].equalsIgnoreCase("off")) {
+                    if (commandSender instanceof Player) {
+                        Player player = (Player) commandSender;
+                        if (Main.isToggleState()) {
+                            if (Actions.getHologramas_visibility().get(player)) {
                                 Actions.setVisibility(player, false);
-                                player.sendMessage("Holographic chat deactivated!");
+                                player.sendMessage(colorCodes.executeReplace(MessagesFile.getFileConfiguration().getString("Hologram-Deactivated")));
+                            } else {
+                                Actions.setVisibility(player, true);
+                                player.sendMessage(colorCodes.executeReplace(MessagesFile.getFileConfiguration().getString("Hologram-Activated")));
                             }
-                            //Execute command to disable the Hologram to the plugin choosen
+                        } else {
+                            player.sendMessage(colorCodes.executeReplace(MessagesFile.getFileConfiguration().getString("Cmd-Error")));
                         }
+                    } else {
+                        Main.getPlugin().getLogger().info(MessagesFile.getFileConfiguration().getString("Cmd-Only-Player"));
                     }
                 }
             } else {
                 //If non argument stated, show the help message defined on the config.yml
                 for (String e: Configuration.getHelp_message()) {
-                    player.sendMessage(new ColorCodes().executeReplace(e));
+                    //player.sendMessage(new ColorCodes().executeReplace(e));
+                    commandSender.sendMessage(colorCodes.executeReplace(e));
                 }
             }
         }
