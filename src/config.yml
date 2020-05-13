@@ -1,0 +1,20 @@
+Tag: '[Holographic Chat]'
+Prefix: 'said:'
+#If Option True, Hologram will stay within value time choosen below. If not it will add 1.5 seconds per 3 characters
+Hologram_time_fixed: true
+Hologram_time: 5000
+#Hologram Y value:
+Hologram_height: 4.0
+#Message shown on /hdchat
+Help_message:
+  - '&c[Holographic Chat]'
+  - '&7/hdchat - Main Command'
+  - '&7/hdchat toggle - Turns the Hologram On or Off for the player itself'
+#Maximum of chat lines per hologram
+Max_lines: 3
+#If activated, the Holograms will only appear when typed "!" on the begining of the sentence
+Special_chat: false
+#If activated, the Holograms will only be seen from within a radius between players
+Radius: false
+#Hologram Visibility distance radius
+Radius_distance: 10

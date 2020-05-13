@@ -184,7 +184,7 @@ public class Actions implements Listener {
                 }
 
                 if (holograma.size() < 1) {
-                    TextLine textLine = holograma.appendTextLine(net.md_5.bungee.api.ChatColor.AQUA + player.getName() + ChatColor.GOLD + " " + Configuration.getHologram_prefix() + ":");
+                    TextLine textLine = holograma.appendTextLine(net.md_5.bungee.api.ChatColor.AQUA + player.getName() + ChatColor.GOLD + " " + Configuration.getHologram_prefix());
                     holograma.appendTextLine(ChatColor.YELLOW + message);
 
                 } else if (holograma.size() > 1) {
